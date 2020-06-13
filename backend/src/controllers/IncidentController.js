@@ -62,15 +62,15 @@ module.exports = {
             .select('ong_id')
             .first();   
         
-            console.log(incidents.ong_id);
-            console.log(ong_id);
+        if (incidents != null) {
+            if (incidents.ong_id != ong_id) {
+                return response.status(401).json({ error: 'Operation not permitted'});
+            }
 
-        if (incidents.ong_id != ong_id) {
-            return response.status(401).json({ error: 'Operation not permitted'});
+            await connection('incidents').where('id', id).delete();
+            return response.status(204).send();
         }
-        
-        await connection('incidents').where('id', id).delete();
 
-        return response.status(204).send();
+        return response.status(404).send();
     }
 }
