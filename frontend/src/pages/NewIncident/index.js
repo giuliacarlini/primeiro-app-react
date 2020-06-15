@@ -23,7 +23,7 @@ export default function NewIncident() {
             title,
             description,
             value,
-        };
+        };    
 
         try {
             await api.post('incidents', data, {
@@ -34,7 +34,7 @@ export default function NewIncident() {
 
             history.push('/profile');
         } catch (err) {
-            alert('Erro ao cadastrar caso, tente novamente.')
+            alert('Erro ao cadastrar caso, tente novamente. Erro: '+err.message)
         }
     }
 
